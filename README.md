@@ -5,7 +5,14 @@ This is the implementation of [ILVR: Conditioning Method for Denoising Diffusion
 This repository is heavily based on [improved diffusion](https://github.com/openai/improved-diffusion) and [guided diffusion](https://github.com/openai/guided-diffusion).
 We use [PyTorch-Resizer](https://github.com/assafshocher/PyTorch-Resizer) for resizing function.
 
-# Download pre-trained models
+## Overview
+
+ILVR is a learning-free method of controlling the generation of unconditional DDPMs. ILVR refines each generation step with low-frequency component of purturbed reference image. Our method enables various tasks (image translation, paint-to-image, editing with scribbles) with only a single model trained on a target dataset. 
+
+![image](https://user-images.githubusercontent.com/36615789/133278340-48050da2-192b-4851-87ab-ba090545886a.png)
+
+
+## Download pre-trained models
 Create a folder `models/` and download model checkpoints into it.
 Here are the unconditional models trained on FFHQ and AFHQ-dog:
 
@@ -16,7 +23,7 @@ These models have seen 10M and 4M images respectively.
 You may also try with models from [guided diffusion](https://github.com/openai/guided-diffusion).
 
 
-# ILVR Sampling
+## ILVR Sampling
 First, set PYTHONPATH variable to point to the root of the repository.
 
 ```
@@ -36,7 +43,7 @@ python scripts/ilvr_sample.py  --attention_resolutions 16 --class_cond False --d
 ILVR sampling is implemented in `p_sample_loop_progressive` of `guided-diffusion/gaussian_diffusion.py`
 
 
-# Results
+## Results
 
 These are samples generated with N=8 and 16:
 
