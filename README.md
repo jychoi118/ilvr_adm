@@ -25,13 +25,15 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)
 
 Use the `ilvr_sample.py` script.
 Here, we provide flags for sampling from above models.
-Feel free to change --down_N and --range_t to adapt downsampling factor and conditioning range from our paper.
+Feel free to change --down_N and --range_t to adapt downsampling factor and conditioning range from the paper.
 
 Refer to [improved diffusion](https://github.com/openai/improved-diffusion) for --timestep_respacing flag.
 
 ```
 python scripts/ilvr_sample.py  --attention_resolutions 16 --class_cond False --diffusion_steps 1000 --dropout 0.0 --image_size 256 --learn_sigma True --noise_schedule linear --num_channels 128 --num_head_channels 64 --num_res_blocks 1 --resblock_updown True --use_fp16 False --use_scale_shift_norm True --timestep_respacing 100 --model_path models/ffhq_10m.pt --base_samples ref_imgs/face --down_N 32 --range_t 0 --save_dir output
 ```
+
+ILVR sampling is implemented in `p_sample_loop_progressive` of `guided-diffusion/gaussian_diffusion.py`
 
 
 # Results
@@ -47,3 +49,5 @@ These are cat-to-dog samples generated with N=32:
 ![c](gif/full_cat2dog_small.gif)
 
 
+## Note
+This repo is re-implemention of our method on [guided diffusion](https://github.com/openai/guided-diffusion). Our initial implementation of the paper is based on [denoising-diffusion-pytorch](https://github.com/rosinality/denoising-diffusion-pytorch).
