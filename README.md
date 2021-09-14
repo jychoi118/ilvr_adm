@@ -1,30 +1,16 @@
-# guided-diffusion
+# ILVR + ADM
 
-This is the codebase for [Diffusion Models Beat GANS on Image Synthesis](http://arxiv.org/abs/2105.05233).
+This is the implementation of [ILVR: Conditioning Method for Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2108.02938).
 
-This repository is based on [openai/improved-diffusion](https://github.com/openai/improved-diffusion), with modifications for classifier conditioning and architecture improvements.
+This repository is heavily based on [guided diffusion](https://github.com/openai/guided-diffusion).
 
 # Download pre-trained models
 
-We have released checkpoints for the main models in the paper. Before using these models, please review the corresponding [model card](model-card.md) to understand the intended use and limitations of these models.
+Here are the unconditional models trained on FFHQ and AFHQ-dog:
 
-Here are the download links for each model checkpoint:
+ * 256x256 FFHQ: [64x64_classifier.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64x64_classifier.pt)
+ * 256x256 AFHQ-dog: [64x64_diffusion.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64x64_diffusion.pt)
 
- * 64x64 classifier: [64x64_classifier.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64x64_classifier.pt)
- * 64x64 diffusion: [64x64_diffusion.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64x64_diffusion.pt)
- * 128x128 classifier: [128x128_classifier.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/128x128_classifier.pt)
- * 128x128 diffusion: [128x128_diffusion.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/128x128_diffusion.pt)
- * 256x256 classifier: [256x256_classifier.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/256x256_classifier.pt)
- * 256x256 diffusion: [256x256_diffusion.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/256x256_diffusion.pt)
- * 256x256 diffusion (not class conditional): [256x256_diffusion_uncond.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/256x256_diffusion_uncond.pt)
- * 512x512 classifier: [512x512_classifier.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/512x512_classifier.pt)
- * 512x512 diffusion: [512x512_diffusion.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/512x512_diffusion.pt)
- * 64x64 -&gt; 256x256 upsampler: [64_256_upsampler.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64_256_upsampler.pt)
- * 128x128 -&gt; 512x512 upsampler: [128_512_upsampler.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/128_512_upsampler.pt)
- * LSUN bedroom: [lsun_bedroom.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/lsun_bedroom.pt)
- * LSUN cat: [lsun_cat.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/lsun_cat.pt)
- * LSUN horse: [lsun_horse.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/lsun_horse.pt)
- * LSUN horse (no dropout): [lsun_horse_nodropout.pt](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/lsun_horse_nodropout.pt)
 
 # Sampling from pre-trained models
 
@@ -120,29 +106,14 @@ SAMPLE_FLAGS="--batch_size 4 --num_samples 100 --timestep_respacing 1000"
 
 # Results
 
-This table summarizes our ImageNet results for pure guided diffusion models:
+These are samples generated with N=8 and 16:
 
-| Dataset          | FID  | Precision | Recall |
-|------------------|------|-----------|--------|
-| ImageNet 64x64   | 2.07 | 0.74      | 0.63   |
-| ImageNet 128x128 | 2.97 | 0.78      | 0.59   |
-| ImageNet 256x256 | 4.59 | 0.82      | 0.52   |
-| ImageNet 512x512 | 7.72 | 0.87      | 0.42   |
+![a](gif/full_face.gif)
 
-This table shows the best results for high resolutions when using upsampling and guidance together:
+These are cat-to-dog samples generated with N=32:
 
-| Dataset          | FID  | Precision | Recall |
-|------------------|------|-----------|--------|
-| ImageNet 256x256 | 3.94 | 0.83      | 0.53   |
-| ImageNet 512x512 | 3.85 | 0.84      | 0.53   |
+![b](gif/full_cat2dog.gif)
 
-Finally, here are the unguided results on individual LSUN classes:
-
-| Dataset      | FID  | Precision | Recall |
-|--------------|------|-----------|--------|
-| LSUN Bedroom | 1.90 | 0.66      | 0.51   |
-| LSUN Cat     | 5.57 | 0.63      | 0.52   |
-| LSUN Horse   | 2.57 | 0.71      | 0.55   |
 
 # Training models
 
