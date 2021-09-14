@@ -3,6 +3,7 @@
 This is the implementation of [ILVR: Conditioning Method for Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2108.02938) (ICCV 2021 Oral).
 
 This repository is heavily based on [improved diffusion](https://github.com/openai/improved-diffusion) and [guided diffusion](https://github.com/openai/guided-diffusion).
+We use [PyTorch-Resizer](https://github.com/assafshocher/PyTorch-Resizer) for resizing function.
 
 # Download pre-trained models
 Create a folder `models/` and download model checkpoints into it.
@@ -16,6 +17,11 @@ You may also try with models from [guided diffusion](https://github.com/openai/g
 
 
 # ILVR Sampling
+First, set PYTHONPATH variable to point to the root of the repository.
+
+```
+export PYTHONPATH=$PYTHONPATH:$(pwd)
+```
 
 Use the `ilvr_sample.py` script.
 Here, we provide flags for sampling from above models.
