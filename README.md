@@ -33,6 +33,7 @@ python scripts/ilvr_sample.py  --attention_resolutions 16 --class_cond False --d
 These are samples generated with N=8 and 16:
 
 ![a](gif/full_face8_small.gif)
+
 ![b](gif/full_face16_small.gif)
 
 These are cat-to-dog samples generated with N=32:
